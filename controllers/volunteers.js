@@ -1,7 +1,4 @@
 const Volunteer = require("../models/volunteers");
-const ObjectId = require("mongodb").ObjectId;
-
-//const contactId = new ObjectId(req.params.id);
 
 const getAllVolunteers = async (req, res) => {
   try {
@@ -17,7 +14,10 @@ const getAllVolunteers = async (req, res) => {
 
 const getOneVolunteer = async (req, res) => {
   try {
-    const result = await Volunteer.findOne({ _id: req.param.id });
+    const result = await Volunteer.findOne({ _id: req.params.id });
+    if (!result) {
+      return res.status(404).json({ message: "Volunteer not found." });
+    }
     res.status(200).json(result);
   } catch (error) {
     console.error("Error fetching single volunteer: ", error);
@@ -27,5 +27,5 @@ const getOneVolunteer = async (req, res) => {
 
 module.exports = {
   getAllVolunteers,
-  getOneVolunteer
+  getOneVolunteer,
 };

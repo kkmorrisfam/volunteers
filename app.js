@@ -3,10 +3,13 @@ const app = express();
 const connectDB = require("./db/connect");
 require("dotenv").config();
 const bodyParser = require("body-parser");
+const swaggerUI = require("swagger-ui-express");
+const swaggerDocument = require("./swagger-output.json");
 
 const port = process.env.PORT || 3000;
 const host = process.env.HOST;
 
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use(bodyParser.json());
 
 app.use("/", require("./routes"));

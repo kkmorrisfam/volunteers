@@ -19,6 +19,7 @@
     "mongodb": "^6.15.0",
     "mongoose": "^8.12.1",
     "swagger": "^0.0.1",
+    "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
