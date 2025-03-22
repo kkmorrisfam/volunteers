@@ -14,5 +14,5 @@ const familySchema = new Schema({
   familySize: { type: Number },
 });
 
-const FamilyMeal = model("FamilyMeal", familySchema);
-model.exports = FamilyMeal;
+const FamilyInNeed = model("FamilyInNeed", familySchema);
+module.exports = FamilyInNeed;

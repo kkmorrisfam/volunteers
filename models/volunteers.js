@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { Schema, SchemaTypes, model } = mongoose;
 
+console.log("inside volunteer model");
+
 const volunteerSchema = new Schema({
   firstName: {
     type: String,
@@ -18,7 +20,7 @@ const volunteerSchema = new Schema({
     {
       familyInNeedId: {
         type: SchemaTypes.ObjectId,
-        ref: "familyInNeed",
+        ref: "FamilyInNeed",
       },
       volunteerDate: { type: String },
       meal: { type: String },
@@ -26,5 +28,6 @@ const volunteerSchema = new Schema({
   ],
 });
 
-const Volunteer = model("Volunteer", volunteerSchema);
-model.exports = Volunteer;
+//default is to pluralize volunteers, "volunteer" specifies my name
+const Volunteer = model("Volunteer", volunteerSchema, "volunteer");
+module.exports = Volunteer;
