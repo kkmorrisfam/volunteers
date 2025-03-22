@@ -28,6 +28,6 @@ const volunteerSchema = new Schema({
   ],
 });
 
-//default is to pluralize volunteers, "volunteer" specifies my name
+//default is to pluralize volunteers, 3rd param, "volunteer" specifies my name in mongodb
 const Volunteer = model("Volunteer", volunteerSchema, "volunteer");
 module.exports = Volunteer;
