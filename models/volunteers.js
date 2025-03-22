@@ -30,9 +30,13 @@ const volunteerSchema = new Schema({
         meal: { type: String },
       },
     ],
-    required: true,
     default: [],
   },
+});
+
+volunteerSchema.pre("save", function (next) {
+  console.log("About to save a volunteer:", this);
+  next();
 });
 
 //default is to pluralize volunteers, 3rd param, "volunteer" specifies my name in mongodb

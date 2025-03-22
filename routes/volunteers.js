@@ -10,4 +10,6 @@ router.get("/", volunteerController.getAllVolunteers);
 router.get("/:id", volunteerController.getOneVolunteer);
 
 router.post("/", validate.addVolunteerRules(), validate.checkValidationErrors, volunteerController.createVolunteer);
+// router.post("/", volunteerController.createVolunteer);
+
 module.exports = router;

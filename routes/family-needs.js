@@ -6,6 +6,6 @@ const familyController = require("../controllers/family-needs");
 
 router.get("/", familyController.getAllFamilies);
 router.get("/:id", familyController.getOneFamily);
-router.post("/", validate.addVolunteerRules)
+router.post("/",);
 
 module.exports = router;

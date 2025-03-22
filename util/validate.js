@@ -37,7 +37,7 @@ validate.addVolunteerRules = () => {
       .notEmpty()
       .matches(/^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)?\d{3}[\s.-]?\d{4}$/)
       .withMessage("Phone number must be a valid US phone number"),
-    check("userName").trim().escape().notEmpty,
+    check("userName").trim().escape().notEmpty(),
     check("password")
       .trim()
       .notEmpty()

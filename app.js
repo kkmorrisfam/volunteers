@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 const swaggerUI = require("swagger-ui-express");
 const swaggerDocument = require("./swagger-output.json");
 
+const cors = require("cors");
+app.use(cors());
+
 const port = process.env.PORT || 3000;
 const host = process.env.HOST;
 
@@ -16,6 +19,8 @@ app.use("/", require("./routes"));
 // app.use("/", (req, res)=>{
 //   res.send("<h1>Volunteers R Us</h1>");
 // });
+
+
 
 const start = async () => {
   try {

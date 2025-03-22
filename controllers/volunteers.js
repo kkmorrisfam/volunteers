@@ -27,17 +27,30 @@ const getOneVolunteer = async (req, res) => {
 
 // Post/ Create route
 const createVolunteer = async (req, res) => {
+  console.log("Beginning createVolunteer/request body:", req.body);
+
+  const { firstName, lastName, email, phone, userName, password } = req.body;
+  const newVolunteer = new Volunteer({
+    firstName,
+    lastName,
+    email,
+    phone,
+    userName,
+    password,
+  });
+
   try {
     // this should be caught in validation chain
-    if (!req.body.userName || !req.body.password) {
+    if (!userName || !password) {
       res
         .status(400)
         .json({ message: "Username or password cannot be empty." });
       return;
     }
 
-    const volunteer = new Volunteer(req.body);
-    await volunteer.save();
+    // const volunteer = new Volunteer(req.body);  // if I do it this way, each field doesn't show up in swagger api-docs
+    await newVolunteer.save();
+    res.status(201).json(newVolunteer);
   } catch (error) {
     console.error("Error adding volunteer:", error);
     res.status(400).json({ message: "Server error adding volunteer." });
