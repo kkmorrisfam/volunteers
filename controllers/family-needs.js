@@ -30,9 +30,28 @@ const getOneFamily = async (req, res) => {
 
 // Put / Edit route
 
-// Delete Route
+
+// Delete Route, delete a family, return status code
+const deleteFamily = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await FamilyInNeed.findByIdAndDelete(id);
+
+    if (!result) {
+      return res.status(404).json({ message: "Volunteer not found." });
+    }
+
+    res.status(200).json({ message: "Family deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting family:", error);
+    res.status(500).json({ message: "Server error deleting family." });
+  }
+};
 
 module.exports = {
   getAllFamilies,
   getOneFamily,
+
+
+  deleteFamily
 };

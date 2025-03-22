@@ -6,6 +6,8 @@ const familyController = require("../controllers/family-needs");
 
 router.get("/", familyController.getAllFamilies);
 router.get("/:id", familyController.getOneFamily);
-router.post("/",);
+router.post("/");
+router.put("/");
+router.delete("/");
 
 module.exports = router;

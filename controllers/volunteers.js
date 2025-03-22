@@ -1,4 +1,5 @@
 const Volunteer = require("../models/volunteers");
+const mongoose = require("mongoose");
 
 const getAllVolunteers = async (req, res) => {
   try {
@@ -58,11 +59,51 @@ const createVolunteer = async (req, res) => {
 };
 
 // Put / Edit route
+const updateVolunteer = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid volunteer ID." });
+  }
+
+  try {
+    const updated = await Volunteer.findByIdAndUpdate(id, req.body, {
+      new: true, // on true, returns updated data to client
+      runValidators: true, // re-runs schema validation before update
+    });
+
+    if (!updated) {
+      return res.status(404).json({ message: "Volunteer not found." });
+    }
+
+    res.status(200).json(updated);
+  } catch (error) {
+    console.error("Error updating volunteer:", error);
+    res.status(500).json({ message: "Server error updating volunteer." });
+  }
+};
 
 // Delete Route
+const deleteVolunteer = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await Volunteer.findByIdAndDelete(id);
+
+    if (!result) {
+      return res.status(404).json({ message: "Volunteer not found." });
+    }
+
+    res.status(200).json({ message: "Volunteer deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting volunteer:", error);
+    res.status(500).json({ message: "Server error deleting volunteer." });
+  }
+};
 
 module.exports = {
   getAllVolunteers,
   getOneVolunteer,
   createVolunteer,
+  updateVolunteer,
+  deleteVolunteer,
 };

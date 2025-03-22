@@ -3,7 +3,7 @@ const swaggerAutogen = require("swagger-autogen")();
 const doc = {
   info: {
     title: "My API",
-    description: "API Documentation for Contacts Project Week 2",
+    description: "API Documentation for Week 3 & 4 Project: Meals for Families in Need",
   },
   host: "",
   servers: [

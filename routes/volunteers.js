@@ -10,6 +10,7 @@ router.get("/", volunteerController.getAllVolunteers);
 router.get("/:id", volunteerController.getOneVolunteer);
 
 router.post("/", validate.addVolunteerRules(), validate.checkValidationErrors, volunteerController.createVolunteer);
-// router.post("/", volunteerController.createVolunteer);
+router.put("/:id",validate.updateVolunteerRules(), validate.checkValidationErrors, volunteerController.updateVolunteer);
+router.delete("/:id", volunteerController.deleteVolunteer);
 
 module.exports = router;

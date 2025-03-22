@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "My API",
-    "description": "API Documentation for Contacts Project Week 2",
+    "description": "API Documentation for Week 3 & 4 Project: Meals for Families in Need",
     "version": "1.0.0"
   },
   "host": "",
@@ -118,14 +118,6 @@
           },
           "400": {
             "description": "Bad Request"
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
           }
         }
       }
