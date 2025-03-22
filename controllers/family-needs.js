@@ -11,6 +11,7 @@ const getAllFamilies = async (req, res) => {
       .json({ message: "Server error while fetching all families in need." });
   }
 };
+
 const getOneFamily = async (req, res) => {
   try {
     console.log("inside getOneFamily");
@@ -24,6 +25,12 @@ const getOneFamily = async (req, res) => {
     res.status(400).json({ message: "Server error getting single family." });
   }
 };
+
+// Post/ Create route
+
+// Put / Edit route
+
+// Delete Route
 
 module.exports = {
   getAllFamilies,

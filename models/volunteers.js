@@ -6,26 +6,33 @@ console.log("inside volunteer model");
 const volunteerSchema = new Schema({
   firstName: {
     type: String,
+    required: true,
   },
   lastName: {
     type: String,
+    required: true,
   },
   email: {
     type: String,
+    required: true,
   },
   phone: { type: String },
   userName: { type: String },
   password: { type: String },
-  service: [
-    {
-      familyInNeedId: {
-        type: SchemaTypes.ObjectId,
-        ref: "FamilyInNeed",
+  service: {
+    type: [
+      {
+        familyInNeedId: {
+          type: SchemaTypes.ObjectId,
+          ref: "FamilyInNeed",
+        },
+        volunteerDate: { type: String },
+        meal: { type: String },
       },
-      volunteerDate: { type: String },
-      meal: { type: String },
-    },
-  ],
+    ],
+    required: true,
+    default: [],
+  },
 });
 
 //default is to pluralize volunteers, 3rd param, "volunteer" specifies my name in mongodb
