@@ -44,7 +44,7 @@ const createVolunteer = async (req, res) => {
     // this should be caught in validation chain
     if (!userName || !password) {
       res
-        .status(400)
+        .status(500)
         .json({ message: "Username or password cannot be empty." });
       return;
     }
@@ -54,7 +54,7 @@ const createVolunteer = async (req, res) => {
     res.status(201).json(newVolunteer);
   } catch (error) {
     console.error("Error adding volunteer:", error);
-    res.status(400).json({ message: "Server error adding volunteer." });
+    res.status(500).json({ message: "Server error adding volunteer." });
   }
 };
 
@@ -63,7 +63,7 @@ const updateVolunteer = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ message: "Invalid volunteer ID." });
+    return res.status(500).json({ message: "Invalid volunteer ID." });
   }
 
   try {

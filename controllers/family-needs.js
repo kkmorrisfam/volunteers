@@ -1,4 +1,5 @@
 const FamilyInNeed = require("../models/family-needs");
+const mongoose = require("mongoose");
 
 const getAllFamilies = async (req, res) => {
   try {
@@ -27,8 +28,44 @@ const getOneFamily = async (req, res) => {
 };
 
 // Post/ Create route
+const createFamily = async (req, res) => {
+  try {
+    const {
+      familyName,
+      firstName,
+      lastName,
+      email,
+      phone,
+      street,
+      city,
+      comment,
+      needDates,
+      familySize
+    } = req.body;
+
+    const newFamily = new FamilyInNeed({
+      familyName,
+      firstName,
+      lastName,
+      email,
+      phone,
+      street,
+      city,
+      comment,
+      needDates: needDates || [], // default to empty array if missing
+      familySize
+    });
+
+    const savedFamily = await newFamily.save();
+    res.status(201).json(savedFamily);
+  } catch (error) {
+    console.error("Error creating family:", error);
+    res.status(500).json({ message: "Server error while creating family." });
+  }
+};
 
 // Put / Edit route
+
 
 
 // Delete Route, delete a family, return status code
@@ -51,7 +88,7 @@ const deleteFamily = async (req, res) => {
 module.exports = {
   getAllFamilies,
   getOneFamily,
-
-
+  createFamily,
+  updateFamily,
   deleteFamily
 };
