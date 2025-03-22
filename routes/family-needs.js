@@ -3,6 +3,6 @@ const router = express.Router();
 
 const familyController = require("../controllers/family-needs");
 
-router.get("/meals", familyController.getAllFamilies);
+router.get("/", familyController.getAllFamilies);
 
 module.exports = router;

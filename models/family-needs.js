@@ -14,5 +14,5 @@ const familySchema = new Schema({
   familySize: { type: Number },
 });
 
-const FamilyInNeed = model("FamilyInNeed", familySchema);
+const FamilyInNeed = model("FamilyInNeed", familySchema, "familyToFeed");
 module.exports = FamilyInNeed;
