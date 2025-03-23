@@ -3,13 +3,14 @@ const swaggerAutogen = require("swagger-autogen")();
 const doc = {
   info: {
     title: "My API",
-    description: "API Documentation for Week 3 & 4 Project: Meals for Families in Need",
+    description:
+      "API Documentation for Week 3 & 4 Project: Meals for Families in Need",
   },
   host: "",
   servers: [
     { url: "http://localhost:5150", description: "Local Server" },
     {
-      url: "https://cse341-contacts-dqby.onrender.com",
+      url: "https://volunteers-2wa4.onrender.com",
       description: "Render Server",
     },
   ],
