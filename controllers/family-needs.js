@@ -40,7 +40,7 @@ const createFamily = async (req, res) => {
       city,
       comment,
       needDates,
-      familySize
+      familySize,
     } = req.body;
 
     const newFamily = new FamilyInNeed({
@@ -53,7 +53,7 @@ const createFamily = async (req, res) => {
       city,
       comment,
       needDates: needDates || [], // default to empty array if missing
-      familySize
+      familySize,
     });
 
     const savedFamily = await newFamily.save();
@@ -65,8 +65,29 @@ const createFamily = async (req, res) => {
 };
 
 // Put / Edit route
+const updateFamily = async (req, res) => {
+  const { id } = req.params;
 
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid family ID." });
+  }
 
+  try {
+    const updatedFamily = await FamilyInNeed.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!updatedFamily) {
+      return res.status(404).json({ message: "Family not found." });
+    }
+
+    res.status(200).json(updatedFamily);
+  } catch (error) {
+    console.error("Error updating family:", error);
+    res.status(500).json({ message: "Server error while updating family." });
+  }
+};
 
 // Delete Route, delete a family, return status code
 const deleteFamily = async (req, res) => {
@@ -90,5 +111,5 @@ module.exports = {
   getOneFamily,
   createFamily,
   updateFamily,
-  deleteFamily
+  deleteFamily,
 };

@@ -63,7 +63,7 @@ const updateVolunteer = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(500).json({ message: "Invalid volunteer ID." });
+    return res.status(400).json({ message: "Invalid volunteer ID." });
   }
 
   try {

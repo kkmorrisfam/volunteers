@@ -6,8 +6,26 @@ const familyController = require("../controllers/family-needs");
 
 router.get("/", familyController.getAllFamilies);
 router.get("/:id", familyController.getOneFamily);
-router.post("/");
-router.put("/");
-router.delete("/");
+router.post("/", validate.addFamilyToFeedRules(), validate.checkValidationErrors, familyController.createFamily);
+
+/* #swagger.tags = ['Family']
+#swagger.parameters['body'] = {
+    in: 'body',
+    required: true,
+    schema: {
+      familyName: "Smith Family",
+      firstName: "John",
+      lastName: "Smith",
+      email: "john@example.com",
+      phone: "555-123-4567",
+      street: "123 Main St",
+      city: "Anytown",
+      comment: "Help needed during recovery",
+      needDates: ["2025-04-20", "2025-04-21"],
+      familySize: 4
+    }
+} */
+router.put("/:id", validate.updateFamilyToFeedRules(), validate.checkValidationErrors, familyController.updateFamily);
+router.delete("/:id", familyController.deleteFamily);
 
 module.exports = router;

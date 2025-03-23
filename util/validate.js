@@ -136,7 +136,8 @@ validate.addFamilyToFeedRules = () => {
       .normalizeEmail(),
     check("phone", "Enter the phone number of the family contact person.")
       .trim()
-      .notEmpty.matches(/^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)?\d{3}[\s.-]?\d{4}$/)
+      .notEmpty()
+      .matches(/^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)?\d{3}[\s.-]?\d{4}$/)
       .withMessage("Phone number must be a valid US phone number"),
     check("street", "Enter street address where food will be delivered to.")
       .trim()
@@ -152,7 +153,7 @@ validate.addFamilyToFeedRules = () => {
   ];
 };
 
-validate.addFamilyToFeedRules = () => {
+validate.updateFamilyToFeedRules = () => {
   return [
     check("familyName", "Enter the family name to feed.")
       .optional()
@@ -181,7 +182,7 @@ validate.addFamilyToFeedRules = () => {
     check("phone", "Enter the phone number of the family contact person.")
       .optional()
       .trim()
-      .notEmpty.matches(/^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)?\d{3}[\s.-]?\d{4}$/)
+      .notEmpty().matches(/^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)?\d{3}[\s.-]?\d{4}$/)
       .withMessage("Phone number must be a valid US phone number"),
     check("street", "Enter street address where food will be delivered to.")
       .optional()
