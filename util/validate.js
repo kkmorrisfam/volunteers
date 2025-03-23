@@ -83,10 +83,11 @@ validate.updateVolunteerRules = () => {
       .trim()
       .matches(/^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)?\d{3}[\s.-]?\d{4}$/)
       .withMessage("Phone number must be a valid US phone number"),
-    check("userName").trim().escape(),
+    check("userName").optional().trim().escape().notEmpty(),
     check("password")
       .optional()
       .trim()
+      .notEmpty()
       .isStrongPassword({
         minLength: 8,
         minLowerCase: 1,
@@ -182,7 +183,8 @@ validate.updateFamilyToFeedRules = () => {
     check("phone", "Enter the phone number of the family contact person.")
       .optional()
       .trim()
-      .notEmpty().matches(/^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)?\d{3}[\s.-]?\d{4}$/)
+      .notEmpty()
+      .matches(/^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)?\d{3}[\s.-]?\d{4}$/)
       .withMessage("Phone number must be a valid US phone number"),
     check("street", "Enter street address where food will be delivered to.")
       .optional()
