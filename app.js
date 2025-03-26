@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const swaggerUI = require("swagger-ui-express");
 const swaggerDocument = require("./swagger-output.json");
 const passport = require("passport");
-const session = require("session");
+const session = require("express-session");
 const GitHubStrategy = require("passport-github2").Strategy;
 
 const cors = require("cors");
@@ -75,9 +75,10 @@ app.get("/", (req, res) => {
       : "Logged Out"
   );
 });
+
 app.get(
   "/github/callback",
-  passport.authenticate("gethub", {
+  passport.authenticate("github", {
     failureRedirect: "/api-docs",
     session: false,
   }),
@@ -88,9 +89,6 @@ app.get(
 );
 
 app.use("/", require("./routes"));
-// app.use("/", (req, res)=>{
-//   res.send("<h1>Volunteers R Us</h1>");
-// });
 
 const start = async () => {
   try {

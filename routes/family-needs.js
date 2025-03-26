@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const validate = require("../util/validate");
+const { isAuthenticated } = require("../util/authenticate");
 
 const familyController = require("../controllers/family-needs");
 
@@ -8,6 +9,7 @@ router.get("/", familyController.getAllFamilies);
 router.get("/:id", familyController.getOneFamily);
 router.post(
   "/",
+  isAuthenticated,
   validate.addFamilyToFeedRules(),
   validate.checkValidationErrors,
   familyController.createFamily
@@ -32,6 +34,7 @@ router.post(
 } */
 router.put(
   "/:id",
+  isAuthenticated,
   validate.updateFamilyToFeedRules(),
   validate.checkValidationErrors,
   (req, res, next) => {
@@ -56,6 +59,6 @@ router.put(
   }
 );
 // familyController.updateFamily);
-router.delete("/:id", familyController.deleteFamily);
+router.delete("/:id", isAuthenticated, familyController.deleteFamily);
 
 module.exports = router;
