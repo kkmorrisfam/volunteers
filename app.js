@@ -9,6 +9,8 @@ const passport = require("passport");
 const session = require("express-session");
 const GitHubStrategy = require("passport-github2").Strategy;
 
+const isProd = process.env.NODE_ENV === "production";
+
 const cors = require("cors");
 app.use(cors());
 
@@ -49,9 +51,13 @@ app
 passport.use(
   new GitHubStrategy(
     {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: process.env.CALLBACK_URL,
+      clientID: isProd
+        ? process.env.GITHUB_CLIENT_ID_PROD
+        : process.env.GITHUB_CLIENT_ID_DEV,
+      clientSecret: isProd
+        ? process.env.GITHUB_CLIENT_SECRET_PROD
+        : process.env.GITHUB_CLIENT_SECRET_DEV,
+      callbackURL: process.env.CALLBACK_URL_DEV,
     },
     function (accessToken, refreshToken, profile, done) {
       //User.findOrCreate({githubId: profile.id}, function (err, user) {
