@@ -96,6 +96,9 @@ validate.updateVolunteerRules = () => {
         minSymbols: 1,
       })
       .withMessage("Password does not meet requirements."),
+    check("service.*.familyInNeedId").optional().isMongoId(),
+    check("service.*.volunteerDate").optional().isString(),
+    check("service.*.meal").optional().isString(),
   ];
 };
 

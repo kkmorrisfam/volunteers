@@ -13,16 +13,28 @@ router.get("/login", passport.authenticate("github"), (req, res) => {});
 //   console.log("🚀 Hit /login route");
 //   next();}, passport.authenticate("github"));
 
-router.get("/logout", function (req, res, next) {
+// router.get("/logout", function (req, res, next) {
+//   req.logout(function (err) {
+//     if (err) {
+//       return next(err);
+//     }
+//     res.redirect("/");
+//     // req.session.destroy(() => {
+//     //   res.redirect("/");
+//     // });
+//   });
+// });
+
+router.get("/logout", (req, res, next) => {
   req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
-    // req.session.destroy(() => {
-    //   res.redirect("/");
-    // });
+    if (err) return next(err);
+
+    req.session.destroy(function (err) {
+      if (err) return next(err);
+
+      res.clearCookie("connect.sid");
+      res.redirect("/");
+    });
   });
 });
-
 module.exports = router;

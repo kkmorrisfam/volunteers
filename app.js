@@ -8,6 +8,7 @@ const swaggerDocument = require("./swagger-output.json");
 const passport = require("passport");
 const session = require("express-session");
 const GitHubStrategy = require("passport-github2").Strategy;
+const MongoStore = require("connect-mongo");
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -18,13 +19,20 @@ const port = process.env.PORT || 5150;
 const host = process.env.HOST;
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
+//.use(session) before use(passport)
 app
   .use(bodyParser.json())
   .use(
     session({
-      secret: "secret",
+      secret: "some secret phrase or word",
       resave: false,
-      saveUninitialized: true,
+      saveUninitialized: true, //if false, then don't save a session unless something is stored
+      //saves sessions in database
+      store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI,
+        collectionName: "sessions",
+      }),
     })
   )
   //this is the basic express session({..}) initialization
@@ -61,6 +69,7 @@ passport.use(
     },
     function (accessToken, refreshToken, profile, done) {
       //User.findOrCreate({githubId: profile.id}, function (err, user) {
+      // console.log(profile);
       return done(null, profile);
       // });
     }
