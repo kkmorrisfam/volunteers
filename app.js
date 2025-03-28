@@ -98,7 +98,7 @@ app.get(
     session: false,
   }),
   (req, res) => {
-    console.log("GitHub login successful:", req.user);
+    console.log("GitHub login successful:"); // req.user);
     req.session.user = req.user;
     res.redirect("/");
   }
