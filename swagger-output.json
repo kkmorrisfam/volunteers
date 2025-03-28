@@ -32,8 +32,41 @@
         }
       }
     },
+    "/github/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/volunteers/": {
       "get": {
+        "tags": [
+          "Volunteer"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -45,6 +78,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Volunteer"
+        ],
         "description": "",
         "parameters": [
           {
@@ -53,6 +89,9 @@
             "schema": {
               "type": "object",
               "properties": {
+                "service": {
+                  "example": "any"
+                },
                 "firstName": {
                   "example": "any"
                 },
@@ -82,6 +121,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -89,6 +131,9 @@
       }
     },
     "/volunteers/{id}": {
+      "tags": [
+        "Volunteer"
+      ],
       "get": {
         "description": "",
         "parameters": [
@@ -165,6 +210,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -174,6 +222,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Volunteer"
+        ],
         "description": "",
         "parameters": [
           {
@@ -187,6 +238,9 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -197,6 +251,9 @@
       }
     },
     "/meals/": {
+      "tags": [
+          "Family"
+        ],
       "get": {
         "description": "",
         "responses": {
@@ -209,6 +266,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Family"
+        ],
         "description": "",
         "parameters": [
           {
@@ -258,6 +318,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -266,6 +329,9 @@
     },
     "/meals/{id}": {
       "get": {
+        "tags": [
+          "Family"
+        ],
         "description": "",
         "parameters": [
           {
@@ -363,6 +429,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -372,6 +441,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Family"
+        ],
         "description": "",
         "parameters": [
           {
@@ -384,6 +456,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
