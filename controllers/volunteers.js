@@ -33,16 +33,20 @@ const createVolunteer = async (req, res) => {
   const { firstName, lastName, email, phone, userName, password } = req.body;
 
   let serviceArray = [];
-  serviceArray = req.body.service.map((item) => {
-    if (!mongoose.Types.ObjectId.isValid(item.familyInNeedId)) {
-      throw new Error("Invalid familyInNeedId in service entry.");
-    }
 
-    return {
-      ...item,
-      familyInNeedId: new mongoose.Types.ObjectId(item.familyInNeedId),
-    };
-  });
+  // check to see if an data was included in the service array first
+  if (Array.isArray(req.body.service)) {
+    serviceArray = req.body.service.map((item) => {
+      if (!mongoose.Types.ObjectId.isValid(item.familyInNeedId)) {
+        throw new Error("Invalid familyInNeedId in service entry.");
+      }
+
+      return {
+        ...item,
+        familyInNeedId: new mongoose.Types.ObjectId(item.familyInNeedId),
+      };
+    });
+  }
 
   const newVolunteer = new Volunteer({
     firstName,
