@@ -10,7 +10,7 @@ router.use("/meals", require("./family-needs"));
 
 router.get("/login", passport.authenticate("github"), (req, res) => {});
 // router.get("/login", (req, res, next) => {
-//   console.log("🚀 Hit /login route");
+//   console.log("Hit /login route");
 //   next();}, passport.authenticate("github"));
 
 // router.get("/logout", function (req, res, next) {
@@ -33,6 +33,7 @@ router.get("/logout", (req, res, next) => {
       if (err) return next(err);
 
       res.clearCookie("connect.sid");
+      console.log("Logout successful. Session destroyed and cookie cleared.");
       res.redirect("/");
     });
   });
